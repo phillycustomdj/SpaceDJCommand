@@ -1,0 +1,173 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --background: #0B0F1C;
+  --foreground: #e0e0e0;
+  --card: #0f1528;
+  --card-foreground: #e0e0e0;
+  --popover: #0f1528;
+  --popover-foreground: #e0e0e0;
+  --primary: #39FF14;
+  --primary-foreground: #0B0F1C;
+  --secondary: #1a2040;
+  --secondary-foreground: #e0e0e0;
+  --muted: #151b30;
+  --muted-foreground: #8892b0;
+  --accent: #39FF14;
+  --accent-foreground: #0B0F1C;
+  --destructive: #ff4444;
+  --destructive-foreground: #ffffff;
+  --border: #39FF1430;
+  --input: #1a2040;
+  --ring: #39FF14;
+  --radius: 0.25rem;
+}
+
+@theme inline {
+  --font-sans: var(--font-space-mono), 'Space Mono', 'Geist Mono', monospace;
+  --font-mono: var(--font-space-mono), 'Space Mono', 'Geist Mono', monospace;
+  --font-display: var(--font-orbitron), 'Orbitron', 'Geist', sans-serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 2px);
+  --radius-xl: calc(var(--radius) + 6px);
+  --color-neon: #39FF14;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Scanline overlay */
+.scanlines::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.06) 2px,
+    rgba(0, 0, 0, 0.06) 4px
+  );
+}
+
+/* CRT flicker for headings */
+@keyframes crt-flicker {
+  0%, 100% { opacity: 1; }
+  92% { opacity: 1; }
+  93% { opacity: 0.8; }
+  94% { opacity: 1; }
+  96% { opacity: 0.9; }
+  97% { opacity: 1; }
+}
+
+.crt-flicker {
+  animation: crt-flicker 4s infinite;
+}
+
+/* Hover glow effect -- replaced clip-path glitch which broke link click targets */
+.glow-hover {
+  transition: text-shadow 0.2s ease;
+}
+
+.glow-hover:hover {
+  text-shadow: 0 0 8px #39FF14, 0 0 16px #39FF1480;
+}
+
+/* Neon glow */
+.neon-glow {
+  box-shadow: 0 0 5px #39FF14, 0 0 10px #39FF1480, 0 0 20px #39FF1440;
+}
+
+.neon-glow-text {
+  text-shadow: 0 0 7px #39FF14, 0 0 14px #39FF1480, 0 0 28px #39FF1440;
+}
+
+/* Pulsing border */
+@keyframes pulse-border {
+  0%, 100% { border-color: #39FF1440; box-shadow: 0 0 5px #39FF1420; }
+  50% { border-color: #39FF14; box-shadow: 0 0 15px #39FF1460, 0 0 30px #39FF1420; }
+}
+
+.pulse-border {
+  animation: pulse-border 3s ease-in-out infinite;
+}
+
+/* Pulsing text */
+@keyframes pulse-text {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+.pulse-text {
+  animation: pulse-text 2s ease-in-out infinite;
+}
+
+/* Blinking cursor */
+@keyframes blink-cursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.blink-cursor::after {
+  content: '_';
+  animation: blink-cursor 1s step-end infinite;
+}
+
+/* Nebula drift */
+@keyframes nebula-drift {
+  0% { transform: scale(1.05) translate(0, 0); }
+  25% { transform: scale(1.07) translate(-5px, 3px); }
+  50% { transform: scale(1.05) translate(3px, -5px); }
+  75% { transform: scale(1.07) translate(-3px, -3px); }
+  100% { transform: scale(1.05) translate(0, 0); }
+}
+
+.nebula-bg {
+  animation: nebula-drift 60s ease-in-out infinite;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0B0F1C;
+}
+::-webkit-scrollbar-thumb {
+  background: #39FF1440;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #39FF1480;
+}
