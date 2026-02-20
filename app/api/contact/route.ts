@@ -78,7 +78,7 @@ function buildConfirmationHtml(data: {
               </table>
 
               <p style="margin:0;font-size:12px;color:#888;line-height:1.6;">
-                If you need to amend your request, reply to this transmission.
+                Our Terran representative will make contact within one Earth rotation. For immediate assistance, transmit directly to adam@phillycustomdj.com
               </p>
             </td>
           </tr>
