@@ -224,7 +224,7 @@ export async function POST(request: Request) {
     const [confirmationResult, notificationResult] = await Promise.all([
       // Confirmation email to the person who submitted
       resend.emails.send({
-        from: "Space DJ Command <onboarding@resend.dev>",
+        from: "Space DJ Command <hello@spacedjcommand.com>",
         to: [templateData.email],
         subject: "Transmission Received -- Space DJ Command",
         html: buildConfirmationHtml(templateData),
@@ -232,7 +232,7 @@ export async function POST(request: Request) {
 
       // Notification email to admin
       resend.emails.send({
-        from: "Space DJ Command <onboarding@resend.dev>",
+        from: "Space DJ Command <hello@spacedjcommand.com>",
         to: [ADMIN_EMAIL],
         replyTo: templateData.email,
         subject: `New Deployment Request from ${templateData.name}`,
