@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link"
 import { useSounds } from "@/components/sound-provider"
 
 
@@ -49,12 +50,14 @@ export default function ListeningRoomPage() {
         </p>
 
         {/* ADAM */}
-        <section className="mt-14">
+        <section id="adam" className="mt-14 scroll-mt-28">
           <h2
             onMouseEnter={playHover}
             className="font-[family-name:var(--font-display)] text-xl font-bold uppercase tracking-wider text-primary glitch-hover"
           >
-            ADAM
+            <Link href="/command#adam" className="hover:underline">
+              ADAM
+            </Link>
           </h2>
           <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {ADAM_PLAYLISTS.map((pl) => (
@@ -81,12 +84,14 @@ export default function ListeningRoomPage() {
         </section>
 
         {/* BENNIE JAMES */}
-        <section className="mt-14">
+        <section id="bennie-james" className="mt-14 scroll-mt-28">
           <h2
             onMouseEnter={playHover}
             className="font-[family-name:var(--font-display)] text-xl font-bold uppercase tracking-wider text-primary glitch-hover"
           >
-            BENNIE JAMES
+            <Link href="/command#bennie-james" className="hover:underline">
+              BENNIE JAMES
+            </Link>
           </h2>
           <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {BENNIE_PLAYLISTS.map((pl) => (

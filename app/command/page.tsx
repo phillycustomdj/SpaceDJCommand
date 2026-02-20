@@ -1,10 +1,12 @@
 "use client"
 
+import Link from "next/link"
 import { useSounds } from "@/components/sound-provider"
 
 
 const DJS = [
   {
+    id: "adam",
     name: "ADAM",
     title: "The Galactic Wedding Architect",
     residency: "Coruscant Senate District / The Outer Rim",
@@ -19,8 +21,10 @@ const DJS = [
       "Interstellar Crowd Control Medal",
       "Coruscant Citation for Sonic Diplomacy",
     ],
+    transmissionHref: "/listening-room#adam",
   },
   {
+    id: "alex",
     name: "ALEX",
     title: "The Pan-Galactic Chaos Agent",
     residency: "Milliways — The Restaurant at the End of the Universe",
@@ -36,8 +40,10 @@ const DJS = [
       "Nebula Groove Citation (Post-Apocalyptic Division)",
       "Order of the Pan Galactic Gargle Blaster",
     ],
+    transmissionHref: null,
   },
   {
+    id: "jack",
     name: "JACK",
     title: "The Retro Space DJ From Knowhere",
     residency: "Knowhere",
@@ -53,8 +59,10 @@ const DJS = [
       "Knowhere Ribbon for High-Octane Grooves",
       "Outer Rim Performance Star",
     ],
+    transmissionHref: null,
   },
   {
+    id: "fonseca",
     name: "A. FONSECA",
     title: "The Machine-Language Maestro",
     residency: "The Hip Joint",
@@ -70,8 +78,10 @@ const DJS = [
       "The 30% Iron Chef Award for Sonic Sustenance",
       "Citation for Outstanding Achievement in the Field of Excellence (C. Montgomery Burns Division)",
     ],
+    transmissionHref: "/visual-transmissions#fonseca",
   },
   {
+    id: "bennie-james",
     name: "BENNIE JAMES",
     title: "The Synth Architect",
     residency: "Off-World Colonies / The Nostromo",
@@ -87,8 +97,10 @@ const DJS = [
       "Tyrell Corporation After-Hours Commendation",
       "Deep Freight Sonic Integrity Medal",
     ],
+    transmissionHref: "/listening-room#bennie-james",
   },
   {
+    id: "dennis",
     name: "DENNIS KIRKLAND",
     title: "The Zero-G Virtuoso",
     residency: "The Distracted Globe",
@@ -103,8 +115,10 @@ const DJS = [
       "OASIS All-Sector MVP (Music & Visuals)",
       "The High-Five Citation for Tactical Mixing",
     ],
+    transmissionHref: null,
   },
   {
+    id: "kid-lightning",
     name: "KID LIGHTNING",
     title: "The Warp-Speed Party Specialist",
     residency: "Quark's Bar, Deep Space 9",
@@ -120,6 +134,7 @@ const DJS = [
       "Gamma Quadrant Groove Distinction",
       "Starfleet Civilian Service Ribbon",
     ],
+    transmissionHref: null,
   },
 ]
 
@@ -140,8 +155,9 @@ export default function CommandPage() {
           {DJS.map((dj) => (
             <article
               key={dj.name}
+              id={dj.id}
               onMouseEnter={playHover}
-              className="group rounded border border-border bg-card/60 backdrop-blur-sm p-6 transition-all hover:border-primary pulse-border"
+              className="group rounded border border-border bg-card/60 backdrop-blur-sm p-6 transition-all hover:border-primary pulse-border scroll-mt-28"
             >
               <h2 className="font-[family-name:var(--font-display)] text-lg font-bold uppercase tracking-wider text-primary glitch-hover">
                 {dj.name}
@@ -187,6 +203,22 @@ export default function CommandPage() {
                     </li>
                   ))}
                 </ul>
+              </div>
+
+              <div className="mt-4 pt-4 border-t border-border">
+                {dj.transmissionHref ? (
+                  <Link
+                    href={dj.transmissionHref}
+                    onMouseEnter={playHover}
+                    className="text-xs font-semibold uppercase tracking-widest text-primary glitch-hover hover:underline"
+                  >
+                    View transmission →
+                  </Link>
+                ) : (
+                  <span className="text-xs uppercase tracking-widest text-muted-foreground/60">
+                    Transmission Pending
+                  </span>
+                )}
               </div>
             </article>
           ))}
