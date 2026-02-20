@@ -15,9 +15,23 @@ export function DeploymentForm() {
   const { playHover, playClick } = useSounds()
   const [submitted, setSubmitted] = useState(false)
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     playClick()
+    const form = e.currentTarget
+    const data = {
+      name: (form.elements.namedItem("name") as HTMLInputElement).value,
+      email: (form.elements.namedItem("email") as HTMLInputElement).value,
+      eventDate: (form.elements.namedItem("event-date") as HTMLInputElement).value,
+      eventType: (form.elements.namedItem("event-type") as HTMLSelectElement).value,
+      venue: (form.elements.namedItem("venue") as HTMLInputElement).value,
+      message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
+    }
+    await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    })
     setSubmitted(true)
   }
 
@@ -50,12 +64,8 @@ export function DeploymentForm() {
       onSubmit={handleSubmit}
       className="rounded border border-border bg-card/60 backdrop-blur-sm p-6 space-y-5 sm:p-8"
     >
-      {/* Name */}
       <div className="space-y-1.5">
-        <label
-          htmlFor="name"
-          className="block text-xs font-bold uppercase tracking-wider text-foreground"
-        >
+        <label htmlFor="name" className="block text-xs font-bold uppercase tracking-wider text-foreground">
           Name
         </label>
         <input
@@ -69,12 +79,8 @@ export function DeploymentForm() {
         />
       </div>
 
-      {/* Email */}
       <div className="space-y-1.5">
-        <label
-          htmlFor="email"
-          className="block text-xs font-bold uppercase tracking-wider text-foreground"
-        >
+        <label htmlFor="email" className="block text-xs font-bold uppercase tracking-wider text-foreground">
           Email
         </label>
         <input
@@ -88,12 +94,8 @@ export function DeploymentForm() {
         />
       </div>
 
-      {/* Event Date */}
       <div className="space-y-1.5">
-        <label
-          htmlFor="event-date"
-          className="block text-xs font-bold uppercase tracking-wider text-foreground"
-        >
+        <label htmlFor="event-date" className="block text-xs font-bold uppercase tracking-wider text-foreground">
           Event Date
         </label>
         <input
@@ -106,12 +108,8 @@ export function DeploymentForm() {
         />
       </div>
 
-      {/* Event Type */}
       <div className="space-y-1.5">
-        <label
-          htmlFor="event-type"
-          className="block text-xs font-bold uppercase tracking-wider text-foreground"
-        >
+        <label htmlFor="event-type" className="block text-xs font-bold uppercase tracking-wider text-foreground">
           Event Type
         </label>
         <select
@@ -121,24 +119,16 @@ export function DeploymentForm() {
           onFocus={playHover}
           className="w-full rounded border border-border bg-input px-3 py-2.5 text-sm text-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
         >
-          <option value="" disabled>
-            Select event type
-          </option>
+          <option value="" disabled>Select event type</option>
           {EVENT_TYPES.map((t) => (
-            <option key={t} value={t}>
-              {t}
-            </option>
+            <option key={t} value={t}>{t}</option>
           ))}
         </select>
       </div>
 
-      {/* Venue */}
       <div className="space-y-1.5">
-        <label
-          htmlFor="venue"
-          className="block text-xs font-bold uppercase tracking-wider text-foreground"
-        >
-          {"Venue / Location"}
+        <label htmlFor="venue" className="block text-xs font-bold uppercase tracking-wider text-foreground">
+          Venue / Location
         </label>
         <input
           id="venue"
@@ -151,14 +141,9 @@ export function DeploymentForm() {
         />
       </div>
 
-      {/* Message */}
       <div className="space-y-1.5">
-        <label
-          htmlFor="message"
-          className="block text-xs font-bold uppercase tracking-wider text-foreground"
-        >
-          Message{" "}
-          <span className="font-normal text-muted-foreground">(optional)</span>
+        <label htmlFor="message" className="block text-xs font-bold uppercase tracking-wider text-foreground">
+          Message <span className="font-normal text-muted-foreground">(optional)</span>
         </label>
         <textarea
           id="message"
@@ -170,7 +155,6 @@ export function DeploymentForm() {
         />
       </div>
 
-      {/* Submit */}
       <button
         type="submit"
         onMouseEnter={playHover}
