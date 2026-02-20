@@ -42,7 +42,7 @@ function buildConfirmationHtml(data: {
                 Greetings, <strong style="color:#39FF14;">${data.name}</strong>.
               </p>
               <p style="margin:0 0 24px;font-size:14px;color:#ccc;line-height:1.6;">
-                Your deployment request has been received by Space DJ Command. Our team is reviewing your transmission and will respond within 48 standard hours.
+                Your deployment request has been received by Space DJ Command. Our team is reviewing your transmission and will respond within 6 standard Earth hours.
               </p>
 
               <!-- Mission Details -->
@@ -78,7 +78,7 @@ function buildConfirmationHtml(data: {
               </table>
 
               <p style="margin:0;font-size:12px;color:#888;line-height:1.6;">
-                Our Terran representative will make contact within one Earth rotation. For immediate assistance, transmit directly to adam@phillycustomdj.com
+                For immediate assistance, contact adam@phillycustomdj.com
               </p>
             </td>
           </tr>
