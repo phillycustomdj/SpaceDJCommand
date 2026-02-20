@@ -3,7 +3,7 @@ import { NextResponse } from "next/server"
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
-const ADMIN_EMAIL = "adam@phillycustomdj.com"
+const ADMIN_EMAIL = "noreply@spacedjcommand.com"
 
 function buildConfirmationHtml(data: {
   name: string
@@ -224,7 +224,7 @@ export async function POST(request: Request) {
     const [confirmationResult, notificationResult] = await Promise.all([
       // Confirmation email to the person who submitted
       resend.emails.send({
-        from: "Space DJ Command <hello@spacedjcommand.com>",
+        from: "Space DJ Command <noreply@spacedjcommand.com>",
         to: [templateData.email],
         subject: "Transmission Received -- Space DJ Command",
         html: buildConfirmationHtml(templateData),
@@ -232,7 +232,7 @@ export async function POST(request: Request) {
 
       // Notification email to admin
       resend.emails.send({
-        from: "Space DJ Command <hello@spacedjcommand.com>",
+        from: "Space DJ Command <noreply@spacedjcommand.com>",
         to: [ADMIN_EMAIL],
         replyTo: templateData.email,
         subject: `New Deployment Request from ${templateData.name}`,
