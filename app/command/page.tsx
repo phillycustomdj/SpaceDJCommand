@@ -11,7 +11,7 @@ const DJS = [
     title: "The Galactic Wedding Architect",
     residency: "Coruscant Senate District / The Outer Rim",
     origin:
-      "First noticed by Figrin D'an at Mos Eisley Cantina. Rose to prominence at a Galactic Senate diplomatic summit where Mon Mothma herself danced on the outer balcony for six hours straight.",
+      "Adam first gained notoriety when he was asked by Figrin D'an to spin between sets at the Mos Eisley Cantina. From there he worked his way across the galaxy from Kamino to Mustafar to Kashyyyk. Adam's legend was cemented during a diplomatic summit on Coruscant. What began as a rigid formal reception for the Galactic Senate became a six-hour cross-quadrant rhapsody. Eyewitnesses confirm that Mon Mothma herself maintained flawless rhythm on the outer balcony. Since that night, Adam has served as primary operative for high-stakes celebrations from the Core Worlds to the desert sands of Tatooine.",
     specialties: [
       "Multi-Species Crowd Calibration",
       "Atmospheric Architecture",
@@ -29,7 +29,7 @@ const DJS = [
     title: "The Pan-Galactic Chaos Agent",
     residency: "Milliways — The Restaurant at the End of the Universe",
     origin:
-      "Stepped up at the Vegan Meat Scandal at Milliways when Steve Aoki walked out. Kept the crowd dancing as the universe approached heat death.",
+      "Alex's big break came on the night of the Vegan Meat Scandal at Milliways. When Steve Aoki famously walked out because the main course — a sentient bovine — was too enthusiastic about being eaten, Alex stepped up to the decks. He kept the crowd dancing even as the universe approached heat death.",
     specialties: [
       "Existential crisis management via deep-space disco",
       "Earth lounge to intergalactic house",
@@ -48,7 +48,7 @@ const DJS = [
     title: "The Retro Space DJ From Knowhere",
     residency: "Knowhere",
     origin:
-      "Armed with a salvaged dual-cassette starship deck and 20th-century Terran Awesome Mixes, de-escalated a Ravager riot through sheer force of groove. Upgraded from cassette to Zune.",
+      "Jack's legend began in the industrial underbelly of Knowhere. Armed with a salvaged dual-cassette starship deck and a crate of 20th-century Terran Awesome Mixes, he spun for miners, Ravagers, and interstellar drifters alike. His defining moment came during a high-stakes standoff when his impromptu Retro Set de-escalated a riot by sheer force of groove. He upgraded from cassette decks to a Zune. He has been the sector's resident sound commander ever since.",
     specialties: [
       "Analog nostalgia in a digital galaxy",
       "Ravager crowd control via 70s/80s anthems",
@@ -67,7 +67,7 @@ const DJS = [
     title: "The Machine-Language Maestro",
     residency: "The Hip Joint",
     origin:
-      "Prevented a planet-wide logic loop during a 48-hour set by beat-matching the rhythm of the club's industrial coolant fans. Only human DJ recognized by the Silicon Council as a Designated Device Driver.",
+      "Fonseca gained legendary status after a 48-hour set at The Hip Joint, where he prevented a planet-wide logic loop by perfectly beat-matching the rhythm of the club's industrial coolant fans. He remains the only human DJ officially recognized by the Silicon Council as a Designated Device Driver.",
     specialties: [
       "High-frequency pulse optimization for synthetic lifeforms",
       "Binary-coded basslines",
@@ -86,7 +86,7 @@ const DJS = [
     title: "The Synth Architect",
     residency: "Off-World Colonies / The Nostromo",
     origin:
-      "Forged in neon-drenched 2019 Los Angeles. His atmospheric synth set masked a system-wide AI malfunction at a corporate off-world launch event, preventing total panic.",
+      "Bennie's reputation was forged in the neon haze of 2019 Los Angeles before extending to the cold cargo holds of Weyland-Yutani deep-space freighters. His breakthrough came during a corporate off-world launch event where his atmospheric synth set masked a system-wide AI malfunction long enough to prevent total panic. Since then, he has become the preferred selector for industrial colonies and replicant-heavy gatherings.",
     specialties: [
       "Neon-drenched atmosphere design",
       "Synthetic remix engineering",
@@ -105,7 +105,7 @@ const DJS = [
     title: "The Zero-G Virtuoso",
     residency: "The Distracted Globe",
     origin:
-      "During a catastrophic gravity failure, continued spinning upside down using haptic-feedback gloves to catch beats mid-air. No avatar left the floor.",
+      "Dennis rose to prominence inside The Distracted Globe, the OASIS's premier zero-gravity nightclub. During a catastrophic server-wide gravity failure — affecting both dancers and equipment — Dennis continued spinning while literally upside down, using haptic-feedback gloves to catch beats mid-air. No avatar left the floor.",
     specialties: [
       "Virtual crowd control (10,000+ simultaneous avatars)",
       "Anti-gravity audio optimization",
@@ -123,7 +123,7 @@ const DJS = [
     title: "The Warp-Speed Party Specialist",
     residency: "Quark's Bar, Deep Space 9",
     origin:
-      "Recalibrated the tempo mid-set during a ceasefire celebration to prevent a diplomatic incident between rival factions. His sabbatical involving a misunderstanding with a controlled substance shipment has been resolved.",
+      "Kid Lightning earned his reputation during a Dominion-era ceasefire celebration at Quark's. When tensions flared between Starfleet officers and visiting Jem'Hadar envoys, he recalibrated the tempo mid-set, preventing a diplomatic incident through sheer rhythmic authority. His temporary sabbatical — involving a misunderstanding with a shipment of Ketracel-White — has since been resolved. He returned to the decks stronger than ever.",
     specialties: [
       "Warp-speed energy escalation",
       "Tactical cross-faction crowd blending",
