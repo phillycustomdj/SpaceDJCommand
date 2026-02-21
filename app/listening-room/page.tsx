@@ -88,9 +88,9 @@ export default function ListeningRoomPage() {
               </p>
               <iframe
                 title="The Future (Live from the past!)"
-                src="https://www.mixcloud.com/widget/iframe/?feed=https%3A%2F%2Fwww.mixcloud.com%2Fmennu%2Fthe-mennu-method-the-future%2F&hide_cover=1&mini=1&light=1"
+                src="https://www.mixcloud.com/widget/iframe/?feed=https%3A%2F%2Fwww.mixcloud.com%2Fmennu%2Fthe-mennu-method-the-future%2F&light=1"
                 width="100%"
-                height="120"
+                height="400"
                 frameBorder="0"
                 allow="autoplay"
                 loading="lazy"
