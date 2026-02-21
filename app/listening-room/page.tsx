@@ -81,6 +81,23 @@ export default function ListeningRoomPage() {
               </div>
             ))}
           </div>
+          <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="rounded border border-border bg-card/60 backdrop-blur-sm p-4 pulse-border">
+              <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-foreground">
+                The Future (Live from the past!)
+              </p>
+              <iframe
+                title="The Future (Live from the past!)"
+                src="https://www.mixcloud.com/widget/iframe/?feed=https%3A%2F%2Fwww.mixcloud.com%2Fmennu%2Fthe-mennu-method-the-future%2F&hide_cover=1&mini=1&light=1"
+                width="100%"
+                height="120"
+                frameBorder="0"
+                allow="autoplay"
+                loading="lazy"
+                className="rounded"
+              />
+            </div>
+          </div>
         </section>
 
         {/* BENNIE JAMES */}
