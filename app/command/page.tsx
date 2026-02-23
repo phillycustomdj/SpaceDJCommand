@@ -53,6 +53,8 @@ const DJS = [
     name: "JACK",
     title: "The Retro Space DJ From Knowhere",
     residency: "Knowhere",
+    imageSide: "/images/jack-side.jpg",
+    imageFront: "/images/jack-front.jpg",
     origin:
       "Jack's legend began in the industrial underbelly of Knowhere. Armed with a salvaged dual-cassette starship deck and a crate of 20th-century Terran Awesome Mixes, he spun for miners, Ravagers, and interstellar drifters alike. His defining moment came during a high-stakes standoff when his impromptu Retro Set de-escalated a riot by sheer force of groove. He upgraded from cassette decks to a Zune. He has been the sector's resident sound commander ever since.",
     specialties: [
