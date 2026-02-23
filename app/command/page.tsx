@@ -144,7 +144,7 @@ const DJS = [
       "Gamma Quadrant Groove Distinction",
       "Starfleet Civilian Service Ribbon",
     ],
-    transmissionHref: null,
+    transmissionHref: "/listening-room#kid-lightning",
   },
 ]
 

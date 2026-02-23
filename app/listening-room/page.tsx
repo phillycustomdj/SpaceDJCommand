@@ -31,7 +31,6 @@ const PENDING_DJS = [
   "Alex",
   "Jack",
   "Dennis Kirkland",
-  "Kid Lightning",
 ]
 
 export default function ListeningRoomPage() {
@@ -131,6 +130,36 @@ export default function ListeningRoomPage() {
                 />
               </div>
             ))}
+          </div>
+        </section>
+
+        {/* KID LIGHTNING */}
+        <section id="kid-lightning" className="mt-14 scroll-mt-28">
+          <h2
+            onMouseEnter={playHover}
+            className="font-[family-name:var(--font-display)] text-xl font-bold uppercase tracking-wider text-primary glitch-hover"
+          >
+            <Link href="/command#kid-lightning" className="hover:underline">
+              KID LIGHTNING
+            </Link>
+          </h2>
+          <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="rounded border border-border bg-card/60 backdrop-blur-sm p-4 pulse-border">
+              <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-foreground">
+                This Is Seti-Alpha-Five!
+              </p>
+              <iframe
+                title="This Is Seti-Alpha-Five! — Kid Lightning (Apple Music)"
+                allow="autoplay *; encrypted-media *;"
+                frameBorder="0"
+                height="450"
+                style={{ width: "100%", maxWidth: "660px", overflow: "hidden", background: "transparent" }}
+                sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
+                src="https://embed.music.apple.com/us/playlist/pl.u-aZb0alxFejo68"
+                loading="lazy"
+                className="rounded"
+              />
+            </div>
           </div>
         </section>
 
