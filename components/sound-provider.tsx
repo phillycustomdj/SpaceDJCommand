@@ -102,17 +102,20 @@ export function SoundProvider({ children }: { children: ReactNode }) {
   }, [])
 
   const toggle = useCallback(() => {
-    setEnabled((prev) => !prev)
-  }, [])
-
-  // React to enabled state changes -- keep audio logic out of setState
-  useEffect(() => {
-    if (enabled) {
-      ensureAudio().then(() => startHum())
-    } else {
-      stopHum()
-    }
-  }, [enabled, ensureAudio, startHum, stopHum])
+    setEnabled((prev) => {
+      const next = !prev
+      if (next) {
+        // Enabling: create/resume AudioContext and start hum
+        void ensureAudio().then(() => {
+          startHum()
+        })
+      } else {
+        // Disabling: fade out/stop hum
+        stopHum()
+      }
+      return next
+    })
+  }, [ensureAudio, startHum, stopHum])
 
   const playHover = useCallback(() => {
     if (!enabled || !audioCtxRef.current) return
