@@ -190,7 +190,7 @@ function DJCard({ dj, playHover }: { dj: DJ; playHover: () => void }) {
   }, [isCoarsePointer])
 
   const sideImageClasses =
-    "object-cover transition-opacity duration-1000 " +
+    "object-cover transition-opacity duration-[1750ms] " +
     (isCoarsePointer
       ? isInView
         ? "opacity-0"
@@ -198,7 +198,7 @@ function DJCard({ dj, playHover }: { dj: DJ; playHover: () => void }) {
       : "group-hover:opacity-0")
 
   const frontImageClasses =
-    "object-cover transition-opacity duration-1000 " +
+    "object-cover transition-opacity duration-[1750ms] " +
     (isCoarsePointer
       ? isInView
         ? "opacity-100"
