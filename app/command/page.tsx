@@ -2,6 +2,7 @@
 
 import Image from "next/image"
 import Link from "next/link"
+import { useEffect, useRef, useState } from "react"
 import { useSounds } from "@/components/sound-provider"
 
 
@@ -145,6 +146,158 @@ const DJS = [
   },
 ]
 
+type DJ = (typeof DJS)[number]
+
+function DJCard({ dj, playHover }: { dj: DJ; playHover: () => void }) {
+  const imageRef = useRef<HTMLDivElement | null>(null)
+  const [isInView, setIsInView] = useState(false)
+  const [isCoarsePointer, setIsCoarsePointer] = useState(false)
+
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    const mq = window.matchMedia("(pointer: coarse)")
+    const update = () => setIsCoarsePointer(mq.matches)
+    update()
+    if (mq.addEventListener) {
+      mq.addEventListener("change", update)
+    } else {
+      // @ts-ignore - older Safari
+      mq.addListener(update)
+    }
+    return () => {
+      if (mq.removeEventListener) {
+        mq.removeEventListener("change", update)
+      } else {
+        // @ts-ignore - older Safari
+        mq.removeListener(update)
+      }
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!isCoarsePointer || !imageRef.current) return
+    const el = imageRef.current
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting && entry.intersectionRatio > 0.4)
+      },
+      { threshold: [0.4] }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [isCoarsePointer])
+
+  const sideImageClasses =
+    "object-cover transition-opacity duration-300 " +
+    (isCoarsePointer
+      ? isInView
+        ? "opacity-0"
+        : "opacity-100"
+      : "group-hover:opacity-0")
+
+  const frontImageClasses =
+    "object-cover transition-opacity duration-300 " +
+    (isCoarsePointer
+      ? isInView
+        ? "opacity-100"
+        : "opacity-0"
+      : "opacity-0 group-hover:opacity-100")
+
+  return (
+    <article
+      id={dj.id}
+      onMouseEnter={playHover}
+      onClick={playHover}
+      className="group rounded border border-border bg-card/60 backdrop-blur-sm p-6 transition-all hover:border-primary pulse-border scroll-mt-28"
+    >
+      <h2 className="font-[family-name:var(--font-display)] text-lg font-bold uppercase tracking-wider text-primary glitch-hover">
+        {dj.name}
+      </h2>
+      <p className="mt-1 text-xs font-semibold uppercase tracking-widest text-foreground">
+        {dj.title}
+      </p>
+      <p className="mt-1 text-xs text-muted-foreground">
+        {"Residency: "}
+        {dj.residency}
+      </p>
+
+      {dj.imageSide && dj.imageFront && (
+        <div
+          ref={imageRef}
+          className="mt-4 relative w-full aspect-square overflow-hidden rounded border border-border bg-card/60"
+        >
+          <Image
+            src={dj.imageSide}
+            alt={`${dj.name} profile`}
+            fill
+            sizes="(min-width: 1024px) 320px, (min-width: 640px) 50vw, 100vw"
+            className={sideImageClasses}
+          />
+          <Image
+            src={dj.imageFront}
+            alt={`${dj.name} profile front`}
+            fill
+            sizes="(min-width: 1024px) 320px, (min-width: 640px) 50vw, 100vw"
+            className={frontImageClasses}
+          />
+        </div>
+      )}
+
+      <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
+        {dj.origin}
+      </p>
+
+      <div className="mt-4">
+        <p className="text-xs font-bold uppercase tracking-wider text-foreground">
+          Specialties
+        </p>
+        <div className="mt-2 flex flex-wrap gap-1.5">
+          {dj.specialties.map((s) => (
+            <span
+              key={s}
+              className="rounded-sm border border-border bg-secondary/50 px-2 py-0.5 text-[10px] tracking-wider text-muted-foreground"
+            >
+              {s}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <div className="mt-4">
+        <p className="text-xs font-bold uppercase tracking-wider text-foreground">
+          Awards
+        </p>
+        <ul className="mt-2 space-y-1">
+          {dj.awards.map((a) => (
+            <li
+              key={a}
+              className="text-[10px] leading-relaxed text-muted-foreground before:content-['//'] before:text-primary before:mr-1.5"
+            >
+              {a}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div className="mt-4 pt-4 border-t border-border">
+        {dj.transmissionHref ? (
+          <Link
+            href={dj.transmissionHref}
+            onMouseEnter={playHover}
+            className="text-xs font-semibold uppercase tracking-widest text-primary glitch-hover hover:underline"
+          >
+            View transmission →
+          </Link>
+        ) : (
+          <span className="text-xs uppercase tracking-widest text-muted-foreground/60">
+            Transmission Pending
+          </span>
+        )}
+      </div>
+    </article>
+  )
+}
+
 export default function CommandPage() {
   const { playHover } = useSounds()
 
@@ -160,93 +313,7 @@ export default function CommandPage() {
 
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {DJS.map((dj) => (
-            <article
-              key={dj.name}
-              id={dj.id}
-              onMouseEnter={playHover}
-              className="group rounded border border-border bg-card/60 backdrop-blur-sm p-6 transition-all hover:border-primary pulse-border scroll-mt-28"
-            >
-              <h2 className="font-[family-name:var(--font-display)] text-lg font-bold uppercase tracking-wider text-primary glitch-hover">
-                {dj.name}
-              </h2>
-              <p className="mt-1 text-xs font-semibold uppercase tracking-widest text-foreground">
-                {dj.title}
-              </p>
-              <p className="mt-1 text-xs text-muted-foreground">
-                {"Residency: "}{dj.residency}
-              </p>
-
-              {dj.imageSide && dj.imageFront && (
-                <div className="mt-4 relative w-full aspect-square overflow-hidden rounded border border-border bg-card/60">
-                  <Image
-                    src={dj.imageSide}
-                    alt={`${dj.name} profile`}
-                    fill
-                    sizes="(min-width: 1024px) 320px, (min-width: 640px) 50vw, 100vw"
-                    className="object-cover transition-opacity duration-300 group-hover:opacity-0"
-                  />
-                  <Image
-                    src={dj.imageFront}
-                    alt={`${dj.name} profile front`}
-                    fill
-                    sizes="(min-width: 1024px) 320px, (min-width: 640px) 50vw, 100vw"
-                    className="object-cover transition-opacity duration-300 opacity-0 group-hover:opacity-100"
-                  />
-                </div>
-              )}
-
-              <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
-                {dj.origin}
-              </p>
-
-              <div className="mt-4">
-                <p className="text-xs font-bold uppercase tracking-wider text-foreground">
-                  Specialties
-                </p>
-                <div className="mt-2 flex flex-wrap gap-1.5">
-                  {dj.specialties.map((s) => (
-                    <span
-                      key={s}
-                      className="rounded-sm border border-border bg-secondary/50 px-2 py-0.5 text-[10px] tracking-wider text-muted-foreground"
-                    >
-                      {s}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              <div className="mt-4">
-                <p className="text-xs font-bold uppercase tracking-wider text-foreground">
-                  Awards
-                </p>
-                <ul className="mt-2 space-y-1">
-                  {dj.awards.map((a) => (
-                    <li
-                      key={a}
-                      className="text-[10px] leading-relaxed text-muted-foreground before:content-['//'] before:text-primary before:mr-1.5"
-                    >
-                      {a}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="mt-4 pt-4 border-t border-border">
-                {dj.transmissionHref ? (
-                  <Link
-                    href={dj.transmissionHref}
-                    onMouseEnter={playHover}
-                    className="text-xs font-semibold uppercase tracking-widest text-primary glitch-hover hover:underline"
-                  >
-                    View transmission →
-                  </Link>
-                ) : (
-                  <span className="text-xs uppercase tracking-widest text-muted-foreground/60">
-                    Transmission Pending
-                  </span>
-                )}
-              </div>
-            </article>
+            <DJCard key={dj.id} dj={dj} playHover={playHover} />
           ))}
         </div>
       </div>
