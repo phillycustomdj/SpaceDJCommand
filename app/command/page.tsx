@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import Link from "next/link"
 import { useSounds } from "@/components/sound-provider"
 
@@ -10,6 +11,8 @@ const DJS = [
     name: "ADAM",
     title: "The Galactic Wedding Architect",
     residency: "Coruscant Senate District / The Outer Rim",
+    imageSide: "/images/adam-side.jpg",
+    imageFront: "/images/adam-front.jpg",
     origin:
       "Adam first gained notoriety when he was asked by Figrin D'an to spin between sets at the Mos Eisley Cantina. From there he worked his way across the galaxy from Kamino to Mustafar to Kashyyyk. Adam's legend was cemented during a diplomatic summit on Coruscant. What began as a rigid formal reception for the Galactic Senate became a six-hour cross-quadrant rhapsody. Eyewitnesses confirm that Mon Mothma herself maintained flawless rhythm on the outer balcony. Since that night, Adam has served as primary operative for high-stakes celebrations from the Core Worlds to the desert sands of Tatooine.",
     specialties: [
@@ -28,6 +31,8 @@ const DJS = [
     name: "ALEX",
     title: "The Pan-Galactic Chaos Agent",
     residency: "Milliways — The Restaurant at the End of the Universe",
+    imageSide: "/images/alex-side.jpg",
+    imageFront: "/images/alex-front.jpg",
     origin:
       "Alex's big break came on the night of the Vegan Meat Scandal at Milliways. When Steve Aoki famously walked out because the main course — a sentient bovine — was too enthusiastic about being eaten, Alex stepped up to the decks. He kept the crowd dancing even as the universe approached heat death.",
     specialties: [
@@ -122,6 +127,8 @@ const DJS = [
     name: "KID LIGHTNING",
     title: "The Warp-Speed Party Specialist",
     residency: "Quark's Bar, Deep Space 9",
+    imageSide: "/images/kid-lightning-side.jpg",
+    imageFront: "/images/kid-lightning-front.jpg",
     origin:
       "Kid Lightning earned his reputation during a Dominion-era ceasefire celebration at Quark's. When tensions flared between Starfleet officers and visiting Jem'Hadar envoys, he recalibrated the tempo mid-set, preventing a diplomatic incident through sheer rhythmic authority. His temporary sabbatical — involving a misunderstanding with a shipment of Ketracel-White — has since been resolved. He returned to the decks stronger than ever.",
     specialties: [
@@ -168,6 +175,25 @@ export default function CommandPage() {
               <p className="mt-1 text-xs text-muted-foreground">
                 {"Residency: "}{dj.residency}
               </p>
+
+              {dj.imageSide && dj.imageFront && (
+                <div className="mt-4 relative w-full aspect-square overflow-hidden rounded border border-border bg-card/60">
+                  <Image
+                    src={dj.imageSide}
+                    alt={`${dj.name} profile`}
+                    fill
+                    sizes="(min-width: 1024px) 320px, (min-width: 640px) 50vw, 100vw"
+                    className="object-cover transition-opacity duration-500 group-hover:opacity-0"
+                  />
+                  <Image
+                    src={dj.imageFront}
+                    alt={`${dj.name} profile front`}
+                    fill
+                    sizes="(min-width: 1024px) 320px, (min-width: 640px) 50vw, 100vw"
+                    className="object-cover transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                  />
+                </div>
+              )}
 
               <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
                 {dj.origin}
