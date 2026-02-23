@@ -183,14 +183,14 @@ export default function CommandPage() {
                     alt={`${dj.name} profile`}
                     fill
                     sizes="(min-width: 1024px) 320px, (min-width: 640px) 50vw, 100vw"
-                    className="object-cover transition-opacity duration-500 group-hover:opacity-0"
+                    className="object-cover transition-opacity duration-300 group-hover:opacity-0"
                   />
                   <Image
                     src={dj.imageFront}
                     alt={`${dj.name} profile front`}
                     fill
                     sizes="(min-width: 1024px) 320px, (min-width: 640px) 50vw, 100vw"
-                    className="object-cover transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                    className="object-cover transition-opacity duration-300 opacity-0 group-hover:opacity-100"
                   />
                 </div>
               )}
