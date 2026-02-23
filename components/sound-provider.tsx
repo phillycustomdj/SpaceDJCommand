@@ -34,16 +34,39 @@ export function SoundProvider({ children }: { children: ReactNode }) {
   const humBufferRef = useRef<AudioBuffer | null>(null)
   const readyRef = useRef(false)
 
+  // Create or resume AudioContext in direct response to a user gesture.
+  const getOrCreateContext = useCallback(() => {
+    if (audioCtxRef.current) {
+      const ctx = audioCtxRef.current
+      if (ctx.state === "suspended") {
+        void ctx.resume().catch(() => {})
+      }
+      return ctx
+    }
+
+    if (typeof window === "undefined") return null
+
+    const AC =
+      // @ts-expect-error webkit prefix for older Safari
+      window.AudioContext || window.webkitAudioContext
+    if (!AC) return null
+
+    const ctx = new AC()
+    audioCtxRef.current = ctx
+
+    if (ctx.state === "suspended") {
+      void ctx.resume().catch(() => {})
+    }
+
+    return ctx
+  }, [])
+
   // Initialize audio context and load the WAV buffer (non-blocking)
   const ensureAudio = useCallback(async () => {
     if (readyRef.current && audioCtxRef.current) return audioCtxRef.current
 
-    const ctx = audioCtxRef.current ?? new AudioContext()
-    audioCtxRef.current = ctx
-
-    if (ctx.state === "suspended") {
-      await ctx.resume()
-    }
+    const ctx = getOrCreateContext()
+    if (!ctx) return null
 
     if (!humGainRef.current) {
       const gain = ctx.createGain()
@@ -64,7 +87,7 @@ export function SoundProvider({ children }: { children: ReactNode }) {
 
     readyRef.current = true
     return ctx
-  }, [])
+  }, [getOrCreateContext])
 
   const startHum = useCallback(() => {
     const ctx = audioCtxRef.current
@@ -115,8 +138,9 @@ export function SoundProvider({ children }: { children: ReactNode }) {
   }, [enabled, ensureAudio, startHum, stopHum])
 
   const playHover = useCallback(() => {
-    if (!enabled || !audioCtxRef.current) return
-    const ctx = audioCtxRef.current
+    if (!enabled) return
+    const ctx = getOrCreateContext()
+    if (!ctx) return
     const osc = ctx.createOscillator()
     const gain = ctx.createGain()
     osc.type = "sine"
@@ -128,11 +152,12 @@ export function SoundProvider({ children }: { children: ReactNode }) {
     gain.connect(ctx.destination)
     osc.start()
     osc.stop(ctx.currentTime + 0.06)
-  }, [enabled])
+  }, [enabled, getOrCreateContext])
 
   const playClick = useCallback(() => {
-    if (!enabled || !audioCtxRef.current) return
-    const ctx = audioCtxRef.current
+    if (!enabled) return
+    const ctx = getOrCreateContext()
+    if (!ctx) return
     const t = ctx.currentTime
 
     const osc1 = ctx.createOscillator()
@@ -158,7 +183,7 @@ export function SoundProvider({ children }: { children: ReactNode }) {
     gain2.connect(ctx.destination)
     osc2.start(t + 0.06)
     osc2.stop(t + 0.12)
-  }, [enabled])
+  }, [enabled, getOrCreateContext])
 
   useEffect(() => {
     return () => {
