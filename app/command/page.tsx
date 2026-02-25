@@ -93,6 +93,8 @@ const DJS = [
     name: "BENNIE JAMES",
     title: "The Synth Architect",
     residency: "Off-World Colonies / The Nostromo",
+    imageSide: "/images/bennie-james-side.jpg",
+    imageFront: "/images/bennie-james-front.jpg",
     origin:
       "Bennie's reputation was forged in the neon haze of 2019 Los Angeles before extending to the cold cargo holds of Weyland-Yutani deep-space freighters. His breakthrough came during a corporate off-world launch event where his atmospheric synth set masked a system-wide AI malfunction long enough to prevent total panic. Since then, he has become the preferred selector for industrial colonies and replicant-heavy gatherings.",
     specialties: [
