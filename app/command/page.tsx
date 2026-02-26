@@ -74,6 +74,8 @@ const DJS = [
     name: "A. FONSECA",
     title: "The Machine-Language Maestro",
     residency: "The Hip Joint",
+    imageSide: "/images/a-fonseca-side.jpg",
+    imageFront: "/images/a-fonseca-front.jpg",
     origin:
       "Fonseca gained legendary status after a 48-hour set at The Hip Joint, where he prevented a planet-wide logic loop by perfectly beat-matching the rhythm of the club's industrial coolant fans. He remains the only human DJ officially recognized by the Silicon Council as a Designated Device Driver.",
     specialties: [
