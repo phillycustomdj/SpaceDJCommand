@@ -1,7 +1,18 @@
-import { Resend } from "resend"
+import nodemailer from "nodemailer"
 import { NextResponse } from "next/server"
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+// Purelymail SMTP (https://purelymail.com)
+const transporter = nodemailer.createTransport({
+  host: "smtp.purelymail.com",
+  port: 465,
+  secure: true,
+  auth: {
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS,
+  },
+})
+
+const FROM = "Space DJ Command <noreply@spacedjcommand.com>"
 
 const ADMIN_EMAIL = "adam@phillycustomdj.com"
 
@@ -221,32 +232,24 @@ export async function POST(request: Request) {
     }
 
     // Send both emails in parallel
-    const [confirmationResult, notificationResult] = await Promise.all([
+    await Promise.all([
       // Confirmation email to the person who submitted
-      resend.emails.send({
-        from: "Space DJ Command <noreply@spacedjcommand.com>",
-        to: [templateData.email],
+      transporter.sendMail({
+        from: FROM,
+        to: templateData.email,
         subject: "Transmission Received -- Space DJ Command",
         html: buildConfirmationHtml(templateData),
       }),
 
       // Notification email to admin
-      resend.emails.send({
-        from: "Space DJ Command <noreply@spacedjcommand.com>",
-        to: [ADMIN_EMAIL],
+      transporter.sendMail({
+        from: FROM,
+        to: ADMIN_EMAIL,
         replyTo: templateData.email,
         subject: `New Deployment Request from ${templateData.name}`,
         html: buildNotificationHtml(templateData),
       }),
     ])
-
-    if (confirmationResult.error || notificationResult.error) {
-      console.error("Resend error:", confirmationResult.error, notificationResult.error)
-      return NextResponse.json(
-        { error: "Failed to send emails. Please try again." },
-        { status: 500 }
-      )
-    }
 
     return NextResponse.json({ success: true })
   } catch (err) {
